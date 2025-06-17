@@ -1,6 +1,3 @@
-.env
-.env.example
-
 # Logs
 client/logs
 client/*.log
@@ -160,3 +157,5 @@ server/dist
 server/build
 server/.strapi-updater.json
 server/.strapi-cloud.json
+server/my-strapi-project/node_modules
+server/my-strapi-project/.cache
