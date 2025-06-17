@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tasks",
+  "info": {
+    "singularName": "task",
+    "pluralName": "tasks",
+    "displayName": "Tasks",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 3,
+      "maxLength": 125
+    },
+    "task_status": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::task-status.task-status"
+    }
+  }
+}
