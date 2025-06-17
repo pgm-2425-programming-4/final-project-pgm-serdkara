@@ -7,7 +7,7 @@ export const Route = createFileRoute("/projects-backlog/")({
 function Backlog() {
   return (
     <div className="p-2">
-      <h3>Backlog Overview</h3>
+      <h3>Backlog</h3>
     </div>
   );
 }

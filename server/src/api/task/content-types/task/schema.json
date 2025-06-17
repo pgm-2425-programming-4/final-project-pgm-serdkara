@@ -17,6 +17,19 @@
       "minLength": 3,
       "maxLength": 125
     },
+    "description": {
+      "type": "text"
+    },
+    "labels": {
+      "type": "json",
+      "default": []
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["Backlog", "To do", "In progress", "Ready for review", "Done"],
+      "default": "Backlog",
+      "required": true
+    },
     "task_status": {
       "type": "relation",
       "relation": "oneToOne",
