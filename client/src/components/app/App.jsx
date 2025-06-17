@@ -1,5 +1,4 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import "./components/app/app.css";
 import { PaginatedTaskList } from "./paginated-task-list/paginated-task-list";
 
 const queryClient = new QueryClient();
