@@ -1,14 +1,13 @@
 {
   "kind": "collectionType",
-  "collectionName": "task_statuses",
+  "collectionName": "labels",
   "info": {
-    "singularName": "task-status",
-    "pluralName": "task-statuses",
-    "displayName": "Task-status",
-    "description": ""
+    "singularName": "label",
+    "pluralName": "labels",
+    "displayName": "Label"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "attributes": {
     "name": {
@@ -18,9 +17,9 @@
     },
     "tasks": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::task.task",
-      "mappedBy": "task_status"
+      "mappedBy": "labels"
     }
   }
 }

@@ -1,9 +1,7 @@
-'use strict';
-
+"use strict";
 /**
  * task router
  */
-
-const { createCoreRouter } = require('@strapi/strapi').factories;
-
-module.exports = createCoreRouter('api::task.task');
+Object.defineProperty(exports, "__esModule", { value: true });
+const strapi_1 = require("@strapi/strapi");
+exports.default = strapi_1.factories.createCoreRouter('api::task.task');
