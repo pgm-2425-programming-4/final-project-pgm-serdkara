@@ -2,6 +2,5 @@
 
 Serdar Karaman
 
-
 Link to project on netlify:
-https://final-project-pgm-serdkara.onrender.com/admin
+https://glittery-pegasus-85b703.netlify.app/
