@@ -1,4 +1,4 @@
-import { StatusColumn } from "./TaskStatus";
+import { TaskStatus } from "./TaskStatus";
 
 export default function StatusBoard({
   project,
@@ -9,9 +9,9 @@ export default function StatusBoard({
   const statuses = ["To do", "In progress", "Ready for review", "Done"];
 
   return (
-    <div className="taskboard__columns">
+    <div className="statusboard__columns">
       {statuses.map((status) => (
-        <StatusColumn
+        <TaskStatus
           key={status}
           status={status}
           project={project}

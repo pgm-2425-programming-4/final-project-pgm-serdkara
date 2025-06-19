@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { API_URL, API_TOKEN } from "../constants/constants";
 
-export function StatusColumn({
+export function TaskStatus({
   status,
   project,
   selectedLabel,

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Status from "../components/StatusBoard";
-import { Form } from "../components/TaskDialog";
+import StatusBoard from "../components/StatusBoard";
+import { TaskDialog } from "../components/TaskDialog";
 import { API_URL, API_TOKEN } from "../constants/constants";
 import { useQueryClient } from "@tanstack/react-query";
 import FilterBar from "../components/FilterBar";
@@ -16,7 +16,7 @@ export default function ProjectPage({ projectId }) {
   const activeProject = params ? params[1].toUpperCase() : null;
   useEffect(() => {}, [projectId]);
 
-  const handleCloseForm = () => setTaskToEdit(null);
+  const handleCloseTaskDialog = () => setTaskToEdit(null);
   const handleAddTask = () => {
     setTaskToEdit({});
   };
@@ -58,7 +58,7 @@ export default function ProjectPage({ projectId }) {
         message: "Error bij opslaan",
       });
     } finally {
-      handleCloseForm();
+      handleCloseTaskDialog();
       queryClient.invalidateQueries(["tasks"]);
       setTimeout(() => setNotification(null), 3000);
     }
@@ -93,7 +93,7 @@ export default function ProjectPage({ projectId }) {
         message: "Fout bij het verwijderen van de taak.",
       });
     } finally {
-      handleCloseForm();
+      handleCloseTaskDialog();
       queryClient.invalidateQueries(["tasks"]);
       setTimeout(() => setNotification(null), 3000);
     }
@@ -101,8 +101,8 @@ export default function ProjectPage({ projectId }) {
 
   return (
     <>
-      <header className="taskboard__header">
-        <FilterBar
+      <header className="statusboard__header">
+        <Navbar
           selectedLabel={selectedLabel}
           onLabelChange={setSelectedLabel}
           searchTerm={searchTerm}
@@ -111,16 +111,16 @@ export default function ProjectPage({ projectId }) {
           activeProject={activeProject}
         />
       </header>
-      <Status
+      <StatusBoard
         project={activeProject}
         selectedLabel={selectedLabel}
         searchTerm={searchTerm}
         onEditTask={setTaskToEdit}
       />
       {taskToEdit !== null && (
-        <Form
+        <TaskDialog
           task={taskToEdit}
-          onClose={handleCloseForm}
+          onClose={handleCloseTaskDialog}
           onSubmit={handleSubmitTask}
           onDelete={handleDeleteTask}
         />

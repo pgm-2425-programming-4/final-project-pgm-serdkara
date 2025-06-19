@@ -1,29 +1,27 @@
 import { Link, useLocation } from "@tanstack/react-router";
 
-export function ProjectNavbar({ projects, onProjectSelect }) {
+export function Navbar({ projects, onProjectSelect }) {
   const location = useLocation();
 
   return (
     <nav>
       <Link
         className={
-          location.pathname === "/"
-            ? "ProjectNavbar__item active"
-            : "ProjectNavbar__item"
+          location.pathname === "/" ? "navbar__item active" : "navbar__item"
         }
         to="/"
       >
         Home
       </Link>
 
-      <h2 className="ProjectNavbar__title">PROJECTS</h2>
-      <ul className="ProjectNavbar__list">
+      <h2 className="navbar__title">PROJECTS</h2>
+      <ul className="navbar__list">
         {projects.map((project) => {
           const isActive = location.pathname === `/projects/${project}`;
           return (
             <li key={project}>
               <Link
-                className={"ProjectNavbar__item" + (isActive ? " active" : "")}
+                className={"navbar__item" + (isActive ? " active" : "")}
                 to={`/projects/${project}`}
                 onClick={() => onProjectSelect(project)}
               >
@@ -34,12 +32,12 @@ export function ProjectNavbar({ projects, onProjectSelect }) {
         })}
       </ul>
 
-      <h2 className="ProjectNavbar__title">INFO</h2>
+      <h2 className="navbar__title">INFO</h2>
       <Link
         className={
           location.pathname === "/about"
-            ? "ProjectNavbar__item active"
-            : "ProjectNavbar__item"
+            ? "navbar__item active"
+            : "navbar__item"
         }
         to="/about"
       >

@@ -1,7 +1,7 @@
 import { Outlet } from "@tanstack/react-router";
 import { useState } from "react";
-import { ProjectSidebar } from "../components/NavBar";
-import { Form } from "../components/TaskDialog";
+import { Navbar } from "../components/NavBar";
+import { TaskDialog } from "../components/TaskDialog";
 import { API_URL, API_TOKEN } from "../constants/constants";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -43,12 +43,12 @@ export default function Layout() {
         throw new Error(`Error ${res.status}: ${errorText}`);
       }
 
-      setNotification({ type: "success", message: "✅ Taak opgeslagen!" });
+      setNotification({ type: "success", message: "Taak opgeslagen!" });
     } catch (err) {
       console.error(err);
       setNotification({
         type: "error",
-        message: "❌ Fout bij het opslaan",
+        message: "Fout bij het opslaan",
       });
     } finally {
       handleCloseForm();
@@ -86,18 +86,15 @@ export default function Layout() {
         message: "Fout bij het verwijderen van de taak.",
       });
     } finally {
-      handleCloseForm();
+      handleCloseTaskDialog();
       queryClient.invalidateQueries(["tasks"]);
       setTimeout(() => setNotification(null), 3000);
     }
   };
   return (
     <>
-      <aside className="ProjectSidebar">
-        <ProjectSidebar
-          projects={["PGM-3", "PGM-4"]}
-          activeProject={activeProject}
-        />
+      <aside className="navbar">
+        <Navbar projects={["PGM-3", "PGM-4"]} activeProject={activeProject} />
       </aside>
 
       <main className="task">
@@ -115,9 +112,9 @@ export default function Layout() {
       </main>
 
       {taskToEdit !== null && (
-        <Form
+        <TaskDialog
           task={taskToEdit}
-          onClose={handleCloseForm}
+          onClose={handleCloseTaskDialog}
           onSubmit={handleSubmitTask}
           onDelete={handleDeleteTask}
         />
