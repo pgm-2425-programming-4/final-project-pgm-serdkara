@@ -1,0 +1,23 @@
+.btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  color: var(--color-text);
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.btn--add {
+  background-color: var(--color-secondary);
+  &:hover {
+    background-color: var(--color-secondary-light);
+  }
+}
+
+.btn--backlog {
+  background-color: var(--color-purple);
+  color: var(--color-background);
+  &:hover {
+    background-color: var(--color-grey);
+  }
+}

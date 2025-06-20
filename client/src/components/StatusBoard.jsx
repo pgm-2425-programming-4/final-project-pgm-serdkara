@@ -9,7 +9,7 @@ export default function StatusBoard({
   const statuses = ["To do", "In progress", "Ready for review", "Done"];
 
   return (
-    <div className="statusboard__columns">
+    <div className="taskboard__columns">
       {statuses.map((status) => (
         <TaskStatus
           key={status}

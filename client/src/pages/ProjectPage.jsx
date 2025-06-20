@@ -34,10 +34,10 @@ export default function ProjectPage({ projectId }) {
         },
         body: JSON.stringify({
           data: {
-            Title: task.Title,
+            title: task.title,
             description: task.description,
             labels: task.labels,
-            task_status: task.task_statuses,
+            task_status: task.task_status,
             project: task.project,
           },
         }),
@@ -101,22 +101,26 @@ export default function ProjectPage({ projectId }) {
 
   return (
     <>
-      <header className="statusboard__header">
-        <Navbar
+      {!location.pathname.endsWith("/backlog") && (
+        <header className="statusboard__header">
+          <FilterBar
+            selectedLabel={selectedLabel}
+            onLabelChange={setSelectedLabel}
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+            onAddTask={handleAddTask}
+            activeProject={activeProject}
+          />
+        </header>
+      )}
+      {!location.pathname.endsWith("/backlog") && (
+        <StatusBoard
+          project={activeProject}
           selectedLabel={selectedLabel}
-          onLabelChange={setSelectedLabel}
           searchTerm={searchTerm}
-          onSearchChange={setSearchTerm}
-          onAddTask={handleAddTask}
-          activeProject={activeProject}
+          onEditTask={setTaskToEdit}
         />
-      </header>
-      <StatusBoard
-        project={activeProject}
-        selectedLabel={selectedLabel}
-        searchTerm={searchTerm}
-        onEditTask={setTaskToEdit}
-      />
+      )}
       {taskToEdit !== null && (
         <TaskDialog
           task={taskToEdit}

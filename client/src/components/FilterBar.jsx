@@ -18,9 +18,9 @@ export default function FilterBar({
 
   return (
     <>
-      <div className="taskboard__filters">
+      <div className="statusboard__filters">
         <select
-          className="taskboard__select"
+          className="statusboard__select"
           value={selectedLabel}
           onChange={(e) => onLabelChange(e.target.value)}
           aria-label="Filter tasks by label"
@@ -40,13 +40,13 @@ export default function FilterBar({
 
         <input
           type="text"
-          className="taskboard__search"
+          className="statusboard__search"
           placeholder="Search title or description"
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
         />
       </div>
-      <div className="taskboard__actions">
+      <div className="statusboard__actions">
         <button className="btn btn--add" onClick={onAddTask}>
           Add new task
         </button>

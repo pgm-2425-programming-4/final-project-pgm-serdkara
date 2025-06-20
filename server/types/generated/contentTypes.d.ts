@@ -413,7 +413,8 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiLabelLabel extends Struct.CollectionTypeSchema {
   collectionName: 'labels';
   info: {
-    displayName: 'Label';
+    description: '';
+    displayName: 'Labels';
     pluralName: 'labels';
     singularName: 'label';
   };
@@ -431,7 +432,6 @@ export interface ApiLabelLabel extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     publishedAt: Schema.Attribute.DateTime;
-    tasks: Schema.Attribute.Relation<'manyToMany', 'api::task.task'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -459,7 +459,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
       'api::project.project'
     > &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.String;
+    name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     tasks: Schema.Attribute.Relation<'oneToMany', 'api::task.task'>;
     updatedAt: Schema.Attribute.DateTime;
@@ -471,7 +471,6 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
 export interface ApiTaskStatusTaskStatus extends Struct.CollectionTypeSchema {
   collectionName: 'task_statuses';
   info: {
-    description: '';
     displayName: 'Task-status';
     pluralName: 'task-statuses';
     singularName: 'task-status';
@@ -489,9 +488,7 @@ export interface ApiTaskStatusTaskStatus extends Struct.CollectionTypeSchema {
       'api::task-status.task-status'
     > &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     tasks: Schema.Attribute.Relation<'oneToMany', 'api::task.task'>;
     updatedAt: Schema.Attribute.DateTime;
@@ -516,13 +513,17 @@ export interface ApiTaskTask extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
-    labels: Schema.Attribute.Relation<'manyToMany', 'api::label.label'>;
+    labels: Schema.Attribute.Relation<'oneToMany', 'api::label.label'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::task.task'> &
       Schema.Attribute.Private;
     project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
+    task_status: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::task-status.task-status'
+    >;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

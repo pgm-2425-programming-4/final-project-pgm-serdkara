@@ -9,7 +9,7 @@ export function TaskStatus({
   onEditTask,
 }) {
   const fetchTasks = async () => {
-    const url = `${API_URL}/tasks?filters[project][Name][$eq]=${encodeURIComponent(project)}&populate[task_types][fields][0]=name&populate[project][fields][0]=Name&populate[state][fields][0]=title`;
+    const url = `${API_URL}/tasks?filters[project][name][$eq]=${encodeURIComponent(project)}&populate[labels][fields][0]=name&populate[project][fields][0]=name&populate[task_status][fields][0]=name`;
 
     const res = await fetch(url, {
       headers: {
@@ -20,6 +20,7 @@ export function TaskStatus({
 
     if (!res.ok) {
       const errorText = await res.text();
+      console.log("Fetching tasks from:", url);
       console.error("Fetch failed:", res.status, errorText);
       throw new Error(`Failed to fetch tasks: ${res.status} ${res.statusText}`);
     }
@@ -37,14 +38,14 @@ export function TaskStatus({
 
   const filteredTasks = tasks
     .filter((task) => {
-      const stateTitle = task?.state?.title;
-      const matchesStatus = stateTitle?.toLowerCase() === status.toLowerCase();
+      const statusName = task?.task_status?.name;
+      const matchesStatus = statusName?.toLowerCase() === status.toLowerCase();
       return matchesStatus;
     })
     .filter((task) => {
       const title = task.title?.toLowerCase() || "";
       const description = task.description?.toLowerCase() || "";
-      const taskStatuses = task.task_types || [];
+      const taskStatuses = task.labels || [];
 
       const matchesSearch =
         !searchTerm ||
@@ -69,7 +70,7 @@ export function TaskStatus({
       {!isLoading && !isError && filteredTasks.length === 0 && <p>No tasks</p>}
 
       {filteredTasks.map((task) => {
-        const taskStatuses = task.task_types || [];
+        const taskStatuses = task.labels || [];
 
         return (
           <div
@@ -78,7 +79,7 @@ export function TaskStatus({
             onClick={() => onEditTask(task)}
           >
             <p className="taskcard__title">{task.title}</p>
-            <div className="taskcard__task-status">
+            <div className="taskcard__status">
               {taskStatuses.map((type, index) => {
                 const name = type.name;
                 const icons = {

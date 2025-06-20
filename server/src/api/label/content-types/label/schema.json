@@ -4,7 +4,8 @@
   "info": {
     "singularName": "label",
     "pluralName": "labels",
-    "displayName": "Label"
+    "displayName": "Labels",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -14,12 +15,6 @@
       "type": "string",
       "required": true,
       "unique": true
-    },
-    "tasks": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::task.task",
-      "mappedBy": "labels"
     }
   }
 }

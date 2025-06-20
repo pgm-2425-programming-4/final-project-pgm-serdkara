@@ -1,24 +1,24 @@
 {
-    "kind": "collectionType",
-    "collectionName": "projects",
-    "info": {
-        "singularName": "project",
-        "pluralName": "projects",
-        "displayName": "Projects",
-        "description": ""
+  "kind": "collectionType",
+  "collectionName": "projects",
+  "info": {
+    "singularName": "project",
+    "pluralName": "projects",
+    "displayName": "Projects",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
     },
-    "options": {
-        "draftAndPublish": true
-    },
-    "attributes": {
-        "Name": {
-            "type": "string"
-        },
-        "tasks": {
-            "type": "relation",
-            "relation": "oneToMany",
-            "target": "api::task.task",
-            "mappedBy": "project"
-        }
+    "tasks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::task.task",
+      "mappedBy": "project"
     }
+  }
 }

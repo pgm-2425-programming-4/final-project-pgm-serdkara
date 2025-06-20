@@ -11,9 +11,16 @@
     "draftAndPublish": true
   },
   "attributes": {
+    "description": {
+      "type": "text"
+    },
     "title": {
-      "type": "string",
-      "required": true
+      "type": "string"
+    },
+    "labels": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::label.label"
     },
     "project": {
       "type": "relation",
@@ -21,13 +28,10 @@
       "target": "api::project.project",
       "inversedBy": "tasks"
     },
-    "description": {
-      "type": "text"
-    },
-    "labels": {
+    "task_status": {
       "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::label.label",
+      "relation": "manyToOne",
+      "target": "api::task-status.task-status",
       "inversedBy": "tasks"
     }
   }

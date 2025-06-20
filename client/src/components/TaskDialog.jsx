@@ -4,10 +4,10 @@ import { API_URL, API_TOKEN } from "../constants/constants";
 export function TaskDialog({ onClose, onSubmit, onDelete, task }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [TaskStatus, setTaskStatus] = useState([]);
-  const [selectedTaskStatus, setSelectedTaskStatus] = useState([]);
-  const [states, setStates] = useState([]);
-  const [selectedState, setSelectedState] = useState("");
+  const [label, setLabel] = useState([]);
+  const [selectedLabel, setSelectedLabel] = useState([]);
+  const [task_statuses, setStatus] = useState([]);
+  const [selectedStatus, setSelectedStatus] = useState("");
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState("");
 
@@ -24,8 +24,8 @@ export function TaskDialog({ onClose, onSubmit, onDelete, task }) {
       setter(json.data);
     }
 
-    fetchData("task-status", setTaskStatus);
-    fetchData("states", setStates);
+    fetchData("labels", setLabel);
+    fetchData("task-statuses", setStatus);
     fetchData("projects", setProjects);
   }, []);
 
@@ -33,8 +33,8 @@ export function TaskDialog({ onClose, onSubmit, onDelete, task }) {
     if (task) {
       setTitle(task.title || "");
       setDescription(task.description || "");
-      setSelectedTaskStatus(task.task_types?.map((t) => t.id) || []);
-      setSelectedState(task.state?.id?.toString() || "");
+      setSelectedLabel(task.labels?.map((t) => t.id) || []);
+      setSelectedStatus(task.task_status?.id?.toString() || "");
       setSelectedProject(task.project?.id?.toString() || "");
     }
   }, [task]);
@@ -45,11 +45,12 @@ export function TaskDialog({ onClose, onSubmit, onDelete, task }) {
       id: task?.id,
       title,
       description,
-      task_status: selectedTaskStatus.map((id) => ({ id })),
-      state: { id: Number(selectedState) },
+      labels: selectedLabel.map((id) => ({ id })),
+      task_status: { id: Number(selectedStatus) },
       project: { id: Number(selectedProject) },
       documentId: task?.documentId,
     };
+    console.log("Submitting task data:", taskData);
     onSubmit(taskData);
   };
 
@@ -77,18 +78,18 @@ export function TaskDialog({ onClose, onSubmit, onDelete, task }) {
               <label className="popup__item">
                 Taak Types:
                 <div className="popup__checkbox-group">
-                  {TaskStatus.map((type) => (
+                  {label.map((type) => (
                     <label key={type.id} className="popup__checkbox-item">
                       <input
                         type="checkbox"
                         value={type.id}
-                        checked={selectedTaskStatus.includes(type.id)}
+                        checked={selectedLabel.includes(type.id)}
                         onChange={(e) => {
                           const id = Number(e.target.value);
                           if (e.target.checked) {
-                            setSelectedTaskStatus((prev) => [...prev, id]);
+                            setSelectedLabel((prev) => [...prev, id]);
                           } else {
-                            setSelectedTaskStatus((prev) =>
+                            setSelectedLabel((prev) =>
                               prev.filter((tid) => tid !== id)
                             );
                           }
@@ -110,7 +111,7 @@ export function TaskDialog({ onClose, onSubmit, onDelete, task }) {
                   <option value="">-- Selecteer een project --</option>
                   {projects.map((proj) => (
                     <option key={proj.id} value={proj.id}>
-                      {proj.Name || "Naamloos"}
+                      {proj.name || "Naamloos"}
                     </option>
                   ))}
                 </select>
@@ -118,13 +119,13 @@ export function TaskDialog({ onClose, onSubmit, onDelete, task }) {
               <label className="popup__item">
                 Status:
                 <select
-                  value={selectedState}
-                  onChange={(e) => setSelectedState(e.target.value)}
+                  value={selectedStatus}
+                  onChange={(e) => setSelectedStatus(e.target.value)}
                 >
                   <option value="">-- Selecteer een status --</option>
-                  {states.map((state) => (
-                    <option key={state.id} value={state.id}>
-                      {state.title || "Geen titel"}
+                  {task_statuses.map((status) => (
+                    <option key={status.id} value={status.id}>
+                      {status.name || "Geen titel"}
                     </option>
                   ))}
                 </select>

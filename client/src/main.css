@@ -1,1 +1,10 @@
-@import "https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css";
+@import "./styles/variables.css";
+@import "./styles/tags.css";
+@import "./styles/header.css";
+@import "./styles/navbar.css";
+@import "./styles/layout.css";
+@import "./styles/statusboard.css";
+@import "./styles/buttons.css";
+@import "./styles/dialog.css";
+@import "./styles/backlog.css";
+@import "./styles/pagination.css";

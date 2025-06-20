@@ -6,8 +6,7 @@ export default function Backlog({ tasks }) {
           <tr className="backlog__header-row">
             <th className="backlog__header">Title</th>
             <th className="backlog__header">Description</th>
-            <th className="backlog__header">Deadline</th>
-            <th className="backlog__header">Status</th>
+            <th className="backlog__header">Publish Date</th>
           </tr>
         </thead>
         <tbody className="backlog__tbody">
@@ -20,7 +19,6 @@ export default function Backlog({ tasks }) {
                   ? new Date(task.publishedAt).toLocaleDateString()
                   : "-"}
               </td>
-              <td className="backlog__cell">{task.state?.title || "-"}</td>
             </tr>
           ))}
         </tbody>

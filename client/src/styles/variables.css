@@ -1,0 +1,10 @@
+:root {
+  --color-background: hsl(0, 0%, 100%);
+  --color-secondary: hsl(165, 97%, 42%);
+  --color-secondary-light: hsla(0, 0%, 54%, 0.541);
+  --color-grey: hsl(0, 0%, 87%);
+  --color-black: hsl(0, 0%, 0%);
+  --color-purple: hsl(246, 78%, 61%);
+  --color-text: hsl(0, 0%, 0%);
+  --color-text-secondary: #969696;
+}

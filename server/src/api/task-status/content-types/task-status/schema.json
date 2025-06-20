@@ -4,17 +4,14 @@
   "info": {
     "singularName": "task-status",
     "pluralName": "task-statuses",
-    "displayName": "Task-status",
-    "description": ""
+    "displayName": "Task-status"
   },
   "options": {
     "draftAndPublish": true
   },
   "attributes": {
     "name": {
-      "type": "string",
-      "required": true,
-      "unique": true
+      "type": "string"
     },
     "tasks": {
       "type": "relation",

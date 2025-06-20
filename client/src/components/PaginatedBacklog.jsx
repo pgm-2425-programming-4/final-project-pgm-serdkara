@@ -12,7 +12,7 @@ export function PaginatedBacklog({ projectId }) {
     queryKey: ["backlogTasks", projectId, currentPage, pageSize],
     queryFn: async () => {
       const res = await fetch(
-        `${API_URL}/tasks?filters[project][Name][$eq]=${projectId}&populate=*&pagination[page]=${currentPage}&pagination[pageSize]=${pageSize}`,
+        `${API_URL}/tasks?filters[project][name][$eq]=${projectId}&populate=*&pagination[page]=${currentPage}&pagination[pageSize]=${pageSize}`,
         {
           headers: {
             Authorization: `Bearer ${API_TOKEN}`,
