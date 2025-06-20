@@ -36,9 +36,9 @@
 }
 
 .pagination__button--active {
-  background-color: #007bff;
+  background-color: var(--color-purple);
   color: white;
-  border-color: #007bff;
+  border-color: var(--color-purple);
 }
 
 .pagination__button:disabled {
